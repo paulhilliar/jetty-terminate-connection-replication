@@ -37,12 +37,19 @@ class JettyTestServer {
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
             response.setStatus(SC_OK);
-            response.setHeader("foo", "bar");
+            response.setHeader("foo1", "bar");
+
             PrintWriter writer = response.getWriter();
             writer.println("Response 1 at %s \n".formatted(Instant.now()));
             response.flushBuffer();
 
+            response.setHeader("foo2", "bar");
+
+            System.out.println("setting response.sendError(-1);");
             response.sendError(-1);
+            System.out.println("Response error sent");
+
+            response.setHeader("foo3", "bar");
 
             //I would expect response.sendError(-1); to have terminated the request and this second line not to appear
             //See: https://jakarta.ee/specifications/servlet/4.0/apidocs/javax/servlet/http/httpservletresponse#sendError-int-
