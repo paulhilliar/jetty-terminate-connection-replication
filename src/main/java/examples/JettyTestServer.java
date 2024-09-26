@@ -43,20 +43,9 @@ class JettyTestServer {
             writer.println("Response 1 at %s \n".formatted(Instant.now()));
             response.flushBuffer();
 
-            response.setHeader("foo2", "bar");
-
             System.out.println("setting response.sendError(-1);");
             response.sendError(-1);
             System.out.println("Response error sent");
-
-            response.setHeader("foo3", "bar");
-
-            //I would expect response.sendError(-1); to have terminated the request and this second line not to appear
-            //See: https://jakarta.ee/specifications/servlet/4.0/apidocs/javax/servlet/http/httpservletresponse#sendError-int-
-            // "After using this method, the response should be considered to be committed and should not be written to."
-
-            writer.println("Response 2 at %s \n".formatted(Instant.now()));
-            response.flushBuffer();
         }
     }
 }
