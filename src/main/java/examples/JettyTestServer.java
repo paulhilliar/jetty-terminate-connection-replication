@@ -37,11 +37,11 @@ class JettyTestServer {
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
             response.setStatus(SC_OK);
-            response.setHeader("foo1", "bar");
+            response.setHeader("foo", "bar");
 
             PrintWriter writer = response.getWriter();
-            writer.println("Response 1 at %s \n".formatted(Instant.now()));
-            response.flushBuffer();
+            writer.println("response body line 1");
+            response.flushBuffer(); //make sure Jetty isn't buffering the response
 
             System.out.println("setting response.sendError(-1);");
             response.sendError(-1);
