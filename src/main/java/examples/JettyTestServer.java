@@ -22,7 +22,7 @@ class JettyTestServer {
     public static void main(String[] args) throws Exception {
         Server server = new Server();
         ServerConnector connector = new ServerConnector(server);
-        connector.setPort(8090);
+        connector.setPort(80);
         server.setConnectors(new Connector[] { connector });
 
         ServletContextHandler contextHandler = new ServletContextHandler();
